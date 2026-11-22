@@ -77,6 +77,7 @@ body{background-image:radial-gradient(circle at 0 0,color-mix(in srgb,var(--acce
 header{border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#7c4dff,#0e9aa7,#2f9e44,#d99a00,#e8590c,#d6336c) 1}
 .term{border-bottom-color:var(--uc)}
 .occ{border-left-color:var(--uc)}.occ b{color:var(--uc)}
+.sheetmode .term:not(.open){color:transparent!important;background:#e5484d!important;border-bottom-color:transparent!important;border-radius:4px;user-select:none;-webkit-user-select:none}.sheetmode .term.open{background:color-mix(in srgb,#e5484d 18%,transparent)!important}
 .mapgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}.mapgrid figure{margin:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;background:#fff}.mapgrid img{width:100%;max-height:200px;object-fit:contain;display:block}.mapgrid figcaption{font-size:12px;padding:3px 8px;background:var(--panel);color:var(--fg)}
 </style>
 </head>
@@ -110,9 +111,12 @@ function route(){nav();app.onclick=null;const [v,a]=(location.hash||'#study').sl
 function study(a){
  if(a===undefined||a===''){app.innerHTML='<h2>単元を選ぶ</h2><p class="mute">太字＋下線の用語（まとめPDFで強調された重要語）をタップすると解説が開きます。</p><div class="grid">'+D.units.map(u=>{const ts=unitTerms(u.id),k=ts.filter(t=>S.k[t]===1).length;return `<a class="card ucard ${uc(u.id)}" style="text-decoration:none;color:inherit" href="#study-${u.id}"><b>${esc(u.title)}</b><div class="mute">プリント${u.prints.join('・')}</div><div class="bar" style="margin-top:8px"><i style="width:${ts.length?k/ts.length*100:0}%;background:var(--uc)"></i></div><div class="mute">覚えた ${k} / ${ts.length}</div></a>`}).join('')+'</div>';return}
  const u=U(+a);
- app.innerHTML=`<p><a href="#study">← 単元一覧</a></p><h2>${esc(u.title)} <span class="mute">プリント${u.prints.join('・')}</span></h2><div id="tx" class="${uc(u.id)}"></div><div class="row" style="margin-top:20px">${u.id>0?`<button onclick="location.hash='study-${u.id-1}'">← 前の単元</button>`:''}${u.id<D.units.length-1?`<button onclick="location.hash='study-${u.id+1}'">次の単元 →</button>`:''}<button class="pri" onclick="startTest({scope:[${u.id}],type:'mix',n:10})">この単元をテスト</button></div>`;
+ app.innerHTML=`<p><a href="#study">← 単元一覧</a></p><h2>${esc(u.title)} <span class="mute">プリント${u.prints.join('・')}</span></h2><div class="row" style="margin:6px 0 10px"><button class="sm ${S.sheet?'pri':''}" id="sh">🟥 赤シート：${S.sheet?'ON':'OFF'}</button><button class="sm" id="sa" ${S.sheet?'':'hidden'}>全部めくる</button><button class="sm" id="sn" ${S.sheet?'':'hidden'}>全部隠す</button></div><div id="tx" class="${uc(u.id)}"></div><div class="row" style="margin-top:20px">${u.id>0?`<button onclick="location.hash='study-${u.id-1}'">← 前の単元</button>`:''}${u.id<D.units.length-1?`<button onclick="location.hash='study-${u.id+1}'">次の単元 →</button>`:''}<button class="pri" onclick="startTest({scope:[${u.id}],type:'mix',n:10})">この単元をテスト</button></div>`;
  $('#tx').innerHTML=u.p.map(p=>`<div class="para ${p.t}">`+p.s.map(([t,id])=>id===null?esc(t):`<span class="term ${S.k[id]===1?'k':S.k[id]===2?'m':''} ${S.bm[id]?'bm':''}" data-t="${id}">${esc(t)}</span>`).join('')+'</div>').join('');
- $('#tx').onclick=e=>{const s=e.target.closest('.term');if(s)popup(+s.dataset.t)};
+ const tx=$('#tx');if(S.sheet)tx.classList.add('sheetmode');
+ $('#sh').onclick=()=>{S.sheet=!S.sheet;save();study(a)};
+ if(S.sheet){$('#sa').onclick=()=>tx.querySelectorAll('.term').forEach(x=>x.classList.add('open'));$('#sn').onclick=()=>tx.querySelectorAll('.term').forEach(x=>x.classList.remove('open'))}
+ tx.onclick=e=>{const s=e.target.closest('.term');if(!s)return;if(S.sheet)s.classList.toggle('open');else popup(+s.dataset.t)};
 }
 function unitTerms(u){const o=[];U(u).p.forEach(p=>p.s.forEach(([t,id])=>{if(id!==null&&!o.includes(id))o.push(id)}));return o}
 function relMaps(id){const t=T(id),txt=t.k;const r=[];D.links.forEach(([kw,ms])=>{if(kw.some(w=>txt.includes(w)))ms.forEach(m=>{if(!r.includes(m))r.push(m)})});return r}
