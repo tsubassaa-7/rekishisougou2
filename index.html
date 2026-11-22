@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="歴史総合 期末対策の学習サイト">
+<style>html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>歴史総合 期末ノート</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap">
+<style>
+:root{--bg:#f5f0fc;--panel:#fffeff;--fg:#26223a;--mute:#6f6a86;--line:#ded4f2;--accent:#6d3fc0;--accent2:#0e8a94;--ok:#1f8f5a;--ng:#d6336c;--hl:#ffe08a;--term:#e4d6fb;--uc:#7c4dff;--shadow:0 2px 10px rgba(80,40,160,.14)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17141f;--panel:#221e2f;--fg:#ece8f7;--mute:#a79fc0;--line:#3a3350;--accent:#b794f6;--accent2:#4fd1c5;--ok:#68d391;--ng:#ff7aa8;--hl:#5a4a10;--term:#463a6e;--shadow:0 2px 10px rgba(0,0,0,.5);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17141f;--panel:#221e2f;--fg:#ece8f7;--mute:#a79fc0;--line:#3a3350;--accent:#b794f6;--accent2:#4fd1c5;--ok:#68d391;--ng:#ff7aa8;--hl:#5a4a10;--term:#463a6e;--shadow:0 2px 10px rgba(0,0,0,.5);color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.85 "Noto Sans JP",system-ui,sans-serif;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 60px}
+.wrap{max-width:900px;margin:0 auto}
+header{padding:18px 0 8px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;justify-content:space-between}
+h1{font:700 22px "Noto Serif JP",serif;margin:0;letter-spacing:.04em}
+h1 small{font:400 12px "Noto Sans JP";color:var(--mute);margin-left:8px;letter-spacing:0}
+h2{font:700 19px "Noto Serif JP",serif;margin:22px 0 8px;text-wrap:balance}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);padding:6px 0}
+nav a{white-space:nowrap;padding:6px 12px;border-radius:999px;color:var(--mute);text-decoration:none;font-size:14px;font-weight:500}
+nav a.on{background:var(--accent);color:#fff}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:6px 14px;min-height:36px}
+button:hover{border-color:var(--accent)}
+button.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+button.sm{padding:2px 10px;min-height:28px;font-size:13px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0;box-shadow:var(--shadow)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.grid .card{margin:0}
+.mute{color:var(--mute);font-size:13px}
+.tag{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:0 9px;color:var(--mute);margin:0 4px 4px 0;background:var(--bg)}
+.term{background:linear-gradient(transparent 55%,var(--term) 55%);border-bottom:1.5px solid var(--accent);cursor:pointer;font-weight:700}
+.term.k{background:none;font-weight:500;border-bottom:1px dotted var(--mute)}
+.term.m{background:var(--hl);border-bottom:2px solid var(--ng)}
+.term.bm::after{content:"★";font-size:.7em;color:var(--accent);vertical-align:super}
+.para{margin:.4em 0;text-align:justify}
+.para.sub{font-weight:700;color:var(--accent2);margin-top:1.1em}
+.para.body,.para.li{margin-left:1.4em;padding-left:1.2em;text-indent:-1.2em;font-size:15.5px;margin-block:.15em}.para.li::before{content:"●";display:inline-block;width:1.2em;text-indent:0;font-size:.6em;vertical-align:.2em;color:var(--uc)}
+.para.quote{margin-left:1.2em;font-size:15px}
+.para.quote{border-left:3px solid var(--line);padding-left:10px;color:var(--mute)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--panel);width:100%;max-width:760px;max-height:86vh;overflow:auto;border-radius:16px 16px 0 0;padding:18px max(18px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px))}
+.sheet h3{font:700 20px "Noto Serif JP",serif;margin:0 0 6px}
+.occ{border-left:3px solid var(--accent2);padding:2px 0 2px 10px;margin:8px 0;font-size:15px}
+.occ b{display:block;font-size:12px;color:var(--accent2)}
+.ext{font-size:12px;color:var(--ng);border:1px solid var(--ng);border-radius:4px;padding:0 5px}
+textarea{width:100%;min-height:70px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px}
+.choices{display:grid;gap:8px;margin:12px 0}
+.choices button{text-align:left;padding:10px 14px}
+.choices button.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--panel))}
+.choices button.ng{border-color:var(--ng);background:color-mix(in srgb,var(--ng) 18%,var(--panel))}
+.q{font-size:17px;line-height:1.9}
+.blank{display:inline-block;min-width:4em;border-bottom:2px solid var(--accent);text-align:center;color:var(--accent);font-weight:700}
+.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ok)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>*{min-width:0}
+label.chk{display:inline-flex;gap:4px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:2px 10px;margin:2px;background:var(--panel);font-size:14px}
+input[type=text]{width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:14px}
+.tl .ev{margin:10px 0;position:relative}.tl .ev::before{content:"";position:absolute;left:-21px;top:11px;width:11px;height:11px;border-radius:50%;background:var(--uc)}
+.tl .y{font:700 17px "Noto Serif JP",serif;color:var(--uc)}
+.viewer{overflow:auto;max-height:62vh;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:grab}
+.viewer img{display:block;max-width:none;height:auto}
+.port{width:64px;height:80px;object-fit:cover;border-radius:6px;border:1px solid var(--line);float:right;margin-left:8px;filter:grayscale(1)}
+.ord{display:grid;gap:8px}.ord button{text-align:left}.ord button.sel{opacity:.4}
+.slot{border:1px dashed var(--line);border-radius:8px;padding:6px 10px;min-height:40px;margin:4px 0;font-size:15px}
+.note{font-size:13px;color:var(--mute);border-top:1px solid var(--line);margin-top:30px;padding-top:10px}
+.big{font:700 30px "Noto Serif JP",serif;color:var(--accent)}
+.uc-uk{--uc:#d33a3a}.uc-us{--uc:#2f9e44}.uc-fr{--uc:#2f6fdb}.uc-de{--uc:#c99700}.uc-it{--uc:#8a8f98}
+.ucard{border-top:5px solid var(--uc)}
+nav a:nth-child(1){color:#7c4dff}nav a:nth-child(2){color:#0e9aa7}nav a:nth-child(3){color:#d6336c}nav a:nth-child(4){color:#2f9e44}nav a:nth-child(5){color:#e8590c}nav a:nth-child(6){color:#d99a00}nav a:nth-child(7){color:#3b82f6}
+nav a.on{color:#fff!important}
+body{background-image:radial-gradient(circle at 0 0,color-mix(in srgb,var(--accent) 14%,transparent),transparent 340px),radial-gradient(circle at 100% 0,color-mix(in srgb,var(--accent2) 12%,transparent),transparent 300px);background-repeat:no-repeat}
+header{border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#7c4dff,#0e9aa7,#2f9e44,#d99a00,#e8590c,#d6336c) 1}
+.term{border-bottom-color:var(--uc)}
+.occ{border-left-color:var(--uc)}.occ b{color:var(--uc)}
+.mapgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}.mapgrid figure{margin:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;background:#fff}.mapgrid img{width:100%;max-height:200px;object-fit:contain;display:block}.mapgrid figcaption{font-size:12px;padding:3px 8px;background:var(--panel);color:var(--fg)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>歴史総合 期末ノート<small>プリント32〜59（まとめPDFより）</small></h1><button class="sm" id="themeb">表示切替</button></header>
+<nav id="nav"></nav>
+<main id="app"><p class="mute">読み込み中…</p></main>
+<p class="note">解説文はまとめPDFの文章をそのまま使っています。PDFにない内容を足した場合のみ「プリント外の内容」と表示します（現状は追加なし）。地図は授業プリントの白黒原図をそのまま使用。進捗・メモはこの端末のブラウザにだけ保存されます。</p>
+</div>
+<script>
+let D,S={k:{},w:{},bm:{},memo:{},log:[]};
+const KEY='rs_v1';
+try{const x=localStorage.getItem(KEY);if(x)S=Object.assign(S,JSON.parse(x))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s),app=$('#app');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const T=id=>D.terms[id], U=id=>D.units[id];
+const uc=id=>{const t=U(id).title;return 'uc-'+(t.startsWith('イギリス')?'uk':t.startsWith('アメリカ')?'us':t.startsWith('フランス')?'fr':t.startsWith('ドイツ')?'de':'it')};
+const ulabel=u=>`${U(u).title}(プリント${U(u).prints.join('・')})`;
+const TABS=[['study','学習'],['timeline','年表'],['people','人物'],['maps','地図'],['test','テスト'],['review','復習'],['progress','進捗']];
+fetch('data.json').then(r=>r.json()).then(d=>{D=d;D.pset=new Set(D.people.map(String));nav();route()});
+addEventListener('hashchange',route);
+$('#themeb').onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark'};
+function nav(){const h=(location.hash||'#study').slice(1).split('-')[0];$('#nav').innerHTML=TABS.map(([k,t])=>`<a href="#${k}" class="${k===h?'on':''}">${t}</a>`).join('')}
+function route(){nav();app.onclick=null;const [v,a]=(location.hash||'#study').slice(1).split('-');({study:study,timeline:timeline,people:people,maps:maps,test:test,review:review,progress:progress}[v]||study)(a);scrollTo(0,0)}
+
+/* ---------- study ---------- */
+function study(a){
+ if(a===undefined||a===''){app.innerHTML='<h2>単元を選ぶ</h2><p class="mute">太字＋下線の用語（まとめPDFで強調された重要語）をタップすると解説が開きます。</p><div class="grid">'+D.units.map(u=>{const ts=unitTerms(u.id),k=ts.filter(t=>S.k[t]===1).length;return `<a class="card ucard ${uc(u.id)}" style="text-decoration:none;color:inherit" href="#study-${u.id}"><b>${esc(u.title)}</b><div class="mute">プリント${u.prints.join('・')}</div><div class="bar" style="margin-top:8px"><i style="width:${ts.length?k/ts.length*100:0}%;background:var(--uc)"></i></div><div class="mute">覚えた ${k} / ${ts.length}</div></a>`}).join('')+'</div>';return}
+ const u=U(+a);
+ app.innerHTML=`<p><a href="#study">← 単元一覧</a></p><h2>${esc(u.title)} <span class="mute">プリント${u.prints.join('・')}</span></h2><div id="tx" class="${uc(u.id)}"></div><div class="row" style="margin-top:20px">${u.id>0?`<button onclick="location.hash='study-${u.id-1}'">← 前の単元</button>`:''}${u.id<D.units.length-1?`<button onclick="location.hash='study-${u.id+1}'">次の単元 →</button>`:''}<button class="pri" onclick="startTest({scope:[${u.id}],type:'mix',n:10})">この単元をテスト</button></div>`;
+ $('#tx').innerHTML=u.p.map(p=>`<div class="para ${p.t}">`+p.s.map(([t,id])=>id===null?esc(t):`<span class="term ${S.k[id]===1?'k':S.k[id]===2?'m':''} ${S.bm[id]?'bm':''}" data-t="${id}">${esc(t)}</span>`).join('')+'</div>').join('');
+ $('#tx').onclick=e=>{const s=e.target.closest('.term');if(s)popup(+s.dataset.t)};
+}
+function unitTerms(u){const o=[];U(u).p.forEach(p=>p.s.forEach(([t,id])=>{if(id!==null&&!o.includes(id))o.push(id)}));return o}
+function relMaps(id){const t=T(id),txt=t.k;const r=[];D.links.forEach(([kw,ms])=>{if(kw.some(w=>txt.includes(w)))ms.forEach(m=>{if(!r.includes(m))r.push(m)})});return r}
+function popup(id){
+ const t=T(id);const m=document.createElement('div');m.className='modal';
+ const rm=relMaps(id);
+ const draw=()=>{m.innerHTML=`<div class="sheet"><div class="row" style="justify-content:space-between"><h3>${esc(t.k)}</h3><button class="sm" id="x">閉じる</button></div>
+ ${D.pset.has(String(id))?'<span class="tag">人物</span>':''}${t.u.length>1?`<span class="tag">${t.u.length}つの単元に登場</span>`:''}
+ <div class="row" style="margin:6px 0"><button class="sm ${S.k[id]===1?'pri':''}" data-s="1">覚えた</button><button class="sm ${S.k[id]===2?'pri':''}" data-s="2">まだ</button><button class="sm ${S.bm[id]?'pri':''}" data-s="b">★ ブックマーク</button></div>
+ ${t.occ.map(([u,s])=>`<div class="occ ${uc(u)}"><b>${esc(ulabel(u))}</b>${esc(s)}</div>`).join('')}
+ ${rm.length?`<h4 style="margin:12px 0 4px">関連する地図（タップで拡大）</h4><div class="mapgrid">${rm.slice(0,4).map(i=>`<figure data-m="${i}"><img src="${mapOf(i).f}" alt=""><figcaption>${esc(mapOf(i).t)}</figcaption></figure>`).join('')}</div>`:''}
+ <h4 style="margin:12px 0 4px">メモ</h4><textarea id="memo" placeholder="自分用メモ">${esc(S.memo[id]||'')}</textarea></div>`;
+  m.querySelector('#x').onclick=()=>{m.remove();if(location.hash.startsWith('#study-'))route()};
+  m.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{const s=b.dataset.s;if(s==='b'){S.bm[id]?delete S.bm[id]:S.bm[id]=1}else{S.k[id]===+s?delete S.k[id]:S.k[id]=+s}save();draw()});
+  m.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>viewMap(b.dataset.m));
+  m.querySelector('#memo').oninput=e=>{S.memo[id]=e.target.value;save()};
+ };draw();m.onclick=e=>{if(e.target===m){m.remove();if(location.hash.startsWith('#study-'))route()}};document.body.appendChild(m);
+}
+const mapOf=i=>D.maps.find(m=>m.id===i);
+function viewMap(id){
+ const mp=mapOf(id);if(!mp)return;const m=document.createElement('div');m.className='modal';let z=1;
+ const rel=D.terms?Object.keys(D.terms).filter(k=>relMaps(k).includes(id)).slice(0,24):[];
+ m.innerHTML=`<div class="sheet"><div class="row" style="justify-content:space-between"><h3>${esc(mp.t)}</h3><button class="sm" id="x">閉じる</button></div><div class="row" style="margin:6px 0"><button class="sm" id="zi">＋拡大</button><button class="sm" id="zo">－縮小</button><span class="mute">ドラッグ／スクロールで移動</span></div><div class="viewer" id="v"><img id="im" src="${mp.f}" style="width:100%"></div><p class="mute">授業プリントの原図（白黒）</p>${rel.length?'<h4>関連用語</h4><div>'+rel.map(k=>`<span class="tag" style="cursor:pointer" data-t="${k}">${esc(T(k).k)}</span>`).join('')+'</div>':''}</div>`;
+ const im=m.querySelector('#im');const set=()=>im.style.width=(z*100)+'%';
+ m.querySelector('#zi').onclick=()=>{z=Math.min(4,z+.5);set()};m.querySelector('#zo').onclick=()=>{z=Math.max(.5,z-.5);set()};
+ m.querySelector('#x').onclick=()=>m.remove();m.onclick=e=>{if(e.target===m)m.remove();const t=e.target.closest('[data-t]');if(t){m.remove();popup(+t.dataset.t)}};
+ const v=m.querySelector('#v');let d=null;v.onpointerdown=e=>{d=[e.clientX,e.clientY,v.scrollLeft,v.scrollTop];v.setPointerCapture(e.pointerId)};v.onpointermove=e=>{if(d){v.scrollLeft=d[2]-(e.clientX-d[0]);v.scrollTop=d[3]-(e.clientY-d[1])}};v.onpointerup=()=>d=null;
+ document.body.appendChild(m);
+}
+
+/* ---------- timeline / people / maps ---------- */
+function timeline(){
+ const f=window._tf??'all';
+ app.innerHTML=`<h2>年表</h2><p class="mute">まとめPDFの文から年号つきの記述を自動で並べています。</p><div class="row"><select id="fs"><option value="all">すべての単元</option>${D.units.map(u=>`<option value="${u.id}" ${f==u.id?'selected':''}>${esc(u.title)}</option>`).join('')}</select></div><div class="tl">`+D.timeline.filter(e=>f==='all'||e.u==f).map(e=>`<div class="ev ${uc(e.u)}"><div class="y">${e.y}年${e.m?e.m+'月':''}${e.d?e.d+'日':''}</div><div>${esc(e.s)}</div><div class="mute">${esc(ulabel(e.u))}</div></div>`).join('')+'</div>';
+ $('#fs').onchange=e=>{window._tf=e.target.value;timeline()};
+}
+function people(){
+ app.innerHTML='<h2>人物カード</h2><p class="mute">誰か・何をしたか・登場プリントを、まとめPDFの文から集めています。</p><div class="grid" id="pg"></div>';
+ const pm={};D.maps.filter(m=>m.kind==='portrait').forEach(m=>pm[m.t]=m);
+ $('#pg').innerHTML=D.people.map(id=>{const t=T(id),p=Object.entries(pm).find(([n])=>t.k.includes(n.replace('F.','')));return `<div class="card ucard ${uc(T(id).u[0])}" data-t="${id}" style="cursor:pointer">${p?`<img class="port" src="${p[1].f}" alt="">`:''}<b>${esc(t.k)}</b><div class="mute">${t.u.map(u=>esc(ulabel(u))).join('／')}</div><div style="font-size:14px;margin-top:6px">${esc(t.occ[0][1].slice(0,90))}${t.occ[0][1].length>90?'…':''}</div></div>`}).join('');
+ $('#pg').onclick=e=>{const c=e.target.closest('[data-t]');if(c)popup(+c.dataset.t)};
+}
+function maps(){
+ app.innerHTML='<h2>地図・図</h2><p class="mute">授業プリントの原図です。用語の解説画面からも関連地図が開けます。</p><div class="grid">'+D.maps.filter(m=>m.kind==='map').map(m=>`<div class="card" data-m="${m.id}" style="cursor:pointer;padding:8px"><img src="${m.f}" loading="lazy" style="width:100%;height:120px;object-fit:cover;border-radius:6px;background:#fff"><b style="font-size:14px">${esc(m.t)}</b></div>`).join('')+'</div>';
+ app.onclick=e=>{const c=e.target.closest('[data-m]');if(c)viewMap(c.dataset.m)};
+}
+
+/* ---------- questions ---------- */
+const termsIn=sc=>{const s=new Set();sc.forEach(u=>unitTerms(u).forEach(t=>s.add(t)));return [...s]};
+const goodTerm=id=>T(id).k.length<=16;
+function mask(s,k){return s.split(k).join('\u0000')}
+function ctxOf(u,sent,ans){
+ const ps=U(u).p;let pi=-1;const txt=p=>p.s.map(x=>x[0]).join('');
+ for(let i=0;i<ps.length;i++)if(txt(ps[i]).includes(sent.trim())){pi=i;break}
+ if(pi<0)return '';const p=ps[pi],full=txt(p),sents=full.split(/(?<=[。！？])/).filter(x=>x.trim());
+ const si=sents.findIndex(x=>x.includes(sent.trim()));
+ const noDigit=!/\d/.test(ans);const bits=[];
+ // 時期
+ let yr=(sent.match(/\d{4}年/)||[])[0];
+ if(!yr&&noDigit){for(let i=si-1;i>=0&&!yr;i--)yr=(sents[i].match(/\d{4}年/)||[])[0];for(let k=pi-1;k>=0&&!yr;k--)yr=(txt(ps[k]).match(/\d{4}年/)||[])[0]}
+ if(yr&&noDigit&&!sent.includes(yr))bits.push('時期：'+yr+'ごろ');
+ // 話題
+ const tp=p.s.find(([t,id])=>id!==null&&t!==ans&&!t.includes(ans)&&!ans.includes(t)&&!sent.includes(t)&&t.length<=14);
+ const sub=[...ps.slice(0,pi+1)].reverse().find(x=>x.t==='sub');
+ if(sub){const st=txt(sub).trim();if(!st.includes(ans))bits.push('項目：'+st)}
+ else if(tp)bits.push('関連：'+tp[0]);
+ let prev='';if(si>0&&!sents[si-1].includes(ans)&&sents[si-1].length<=90)prev=sents[si-1].trim();
+ return `<div class="mute" style="margin-bottom:6px">${esc(U(u).title)}（プリント${U(u).prints.join('・')}）${bits.length?'｜'+bits.map(esc).join('｜'):''}</div>`+(prev?`<div class="mute" style="font-size:13px;margin-bottom:6px">直前の文：${esc(prev)}</div>`:'');
+}
+function qCloze(id,pool,input){
+ const t=T(id),occ=t.occ.filter(o=>o[1].includes(t.k)&&o[1].length>=14);if(!occ.length)return null;const [u,s]=rnd(occ);
+ const q={id,u,type:input?'reveal':'choice',ans:t.k,html:ctxOf(u,s,t.k)+esc(mask(s,t.k)).replace(/\u0000/g,'<span class="blank">　　　</span>'),lab:'穴埋め'};
+ if(!input){const L=t.k.length;const d=shuf(pool.filter(x=>x!=id&&goodTerm(x)&&!s.includes(T(x).k)&&Math.abs(T(x).k.length-L)<=3)).slice(0,3);if(d.length<3)return null;q.ch=shuf([t.k,...d.map(x=>T(x).k)])}
+ return q}
+function qOne(id){const t=T(id);const [u,s]=t.occ[0];return {id,u,type:'flash',ans:t.k,front:t.k,back:t.occ.map(o=>o[1]).join('\n'),lab:'一問一答'}}
+function qDef(id,pool){ // sentence -> term
+ return qCloze(id,pool,false)}
+function qPerson(id,pool){const t=T(id);const occ=t.occ.filter(o=>o[1].includes(t.k));if(!occ.length)return null;const ps=D.people.filter(x=>x!=id&&!t.k.includes(T(x).k)&&!T(x).k.includes(t.k));if(ps.length<3)return null;const [u,s]=rnd(occ);return {id,u,type:'choice',ans:t.k,html:'この人物は誰？<br>'+esc(mask(s,t.k)).replace(/\u0000/g,'<span class="blank">　　　</span>'),ch:shuf([t.k,...shuf(ps).slice(0,3).map(x=>T(x).k)]),lab:'人物当て'}}
+function qOrder(sc){const ev=D.timeline.filter(e=>sc.includes(e.u)&&e.s.length<90);if(ev.length<4)return null;const seen=new Set(),pick=[];for(const e of shuf(ev)){if(!seen.has(e.y)){seen.add(e.y);pick.push(e)}if(pick.length==4)break}if(pick.length<4)return null;pick.sort((a,b)=>a.y-b.y||a.m-b.m);return {id:null,u:pick[0].u,type:'order',items:pick,lab:'年代並べ替え'}}
+function makeQs(cfg,pool0){
+ const sc=cfg.scope;let pool=pool0||termsIn(sc).filter(goodTerm);const out=[];let guard=0;
+ while(out.length<cfg.n&&guard++<cfg.n*12){
+  let ty=cfg.type;if(ty==='mix')ty=rnd(['input','input','input','flash','order','person']);
+  let q=null;const id=rnd(pool);
+  if(ty==='choice')q=qCloze(id,termsIn(sc),false);else if(ty==='input')q=qCloze(id,pool,true);else if(ty==='flash')q=qOne(id);else if(ty==='order')q=qOrder(sc);else if(ty==='person'){const ps=pool0?pool.filter(x=>D.pset.has(String(x))):D.people.filter(x=>T(x).u.some(u=>sc.includes(u)));if(ps.length)q=qPerson(rnd(ps),pool)}
+  if(q&&!(q.id!==null&&out.some(o=>o.id===q.id&&o.type===q.type)))out.push(q)}
+ return out}
+
+/* ---------- test ---------- */
+function test(){
+ app.innerHTML=`<h2>テスト</h2><div class="card"><b>範囲（単元）</b><div id="sc">${D.units.map(u=>`<label class="chk"><input type="checkbox" value="${u.id}" checked>${esc(u.title)}</label>`).join('')}</div><div class="row" style="margin-top:6px"><button class="sm" id="all">全選択</button><button class="sm" id="none">全解除</button></div></div>
+ <div class="card"><b>形式</b><div class="row"><select id="ty"><option value="input">穴埋め（答えを思い浮かべて確認）</option><option value="flash">一問一答（フラッシュカード）</option><option value="order">年代並べ替え（流れ）</option><option value="person">人物当て</option><option value="mix">ミックス</option></select><span class="mute">問題数</span><button class="sm" id="nm">－</button><input type="number" id="n" value="10" min="1" max="100" style="width:4.5em;text-align:center;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--bg)"><button class="sm" id="np">＋</button><span class="mute">問</span></div><div class="row" style="margin-top:10px"><button class="pri" id="go">スタート</button></div></div>
+ <div class="card"><b>模擬テスト</b><p class="mute">選択した範囲・問題数でミックス出題。制限時間は1問40秒換算です。終了後に単元ごとの弱点を分析します。</p><button class="pri" id="mock">模擬テスト開始</button></div>`;
+ const sel=()=>[...document.querySelectorAll('#sc input:checked')].map(i=>+i.value);
+ $('#all').onclick=()=>document.querySelectorAll('#sc input').forEach(i=>i.checked=true);$('#none').onclick=()=>document.querySelectorAll('#sc input').forEach(i=>i.checked=false);
+ const nn=()=>Math.max(1,Math.min(100,parseInt($('#n').value)||10));$('#nm').onclick=()=>$('#n').value=Math.max(1,nn()-1);$('#np').onclick=()=>$('#n').value=Math.min(100,nn()+1);
+ $('#go').onclick=()=>{if(!sel().length)return;startTest({scope:sel(),type:$('#ty').value,n:nn()})};
+ $('#mock').onclick=()=>{if(!sel().length)return;{const n=nn();startTest({scope:sel(),type:'mix',n,mock:n*40})}};
+}
+function review(){
+ const wr=Object.keys(S.w).filter(k=>S.w[k]>0),mada=Object.keys(S.k).filter(k=>S.k[k]===2),bm=Object.keys(S.bm);
+ const pool=[...new Set([...wr,...mada])];
+ app.innerHTML=`<h2>復習</h2><div class="card"><div>間違えた用語：<b>${wr.length}</b>　「まだ」の用語：<b>${mada.length}</b>　★：<b>${bm.length}</b></div><div class="row" style="margin-top:8px"><button class="pri" id="rv" ${pool.length?'':'disabled'}>間違い・まだ から出題</button><button id="rf" ${pool.length?'':'disabled'}>フラッシュカードで復習</button></div>${pool.length?'':'<p class="mute">まだ記録がありません。テストで間違えた問題と「まだ」マークの用語がここに集まります。</p>'}</div>
+ <h3>間違えた用語</h3>${wr.sort((a,b)=>S.w[b]-S.w[a]).map(k=>`<span class="tag" style="cursor:pointer" data-t="${k}">${esc(T(k).k)} ×${S.w[k]}</span>`).join('')||'<p class="mute">なし</p>'}
+ <h3>ブックマーク</h3>${bm.map(k=>`<span class="tag" style="cursor:pointer" data-t="${k}">★ ${esc(T(k).k)}</span>`).join('')||'<p class="mute">なし</p>'}
+ <h3>メモ</h3>${Object.entries(S.memo).filter(([k,v])=>v).map(([k,v])=>`<div class="card" data-t="${k}" style="cursor:pointer"><b>${esc(T(k).k)}</b><div>${esc(v)}</div></div>`).join('')||'<p class="mute">なし</p>'}`;
+ app.onclick=e=>{const c=e.target.closest('[data-t]');if(c)popup(+c.dataset.t)};
+ if(pool.length){const sc=D.units.map(u=>u.id);$('#rv').onclick=()=>startTest({scope:sc,type:'mix',n:Math.min(15,Math.max(5,pool.length)),review:true},pool.map(Number));$('#rf').onclick=()=>startTest({scope:sc,type:'flash',n:Math.min(20,pool.length),review:true},pool.map(Number))}
+}
+function startTest(cfg,pool){
+ location.hash='test';
+ const qs=makeQs(cfg,pool);if(!qs.length){app.innerHTML='<p>この範囲では問題を作れませんでした。範囲を広げてください。</p><button onclick="route()">戻る</button>';return}
+ let i=0,score=0,res=[],t0=Date.now(),timer=null;
+ const finish=()=>{clearInterval(timer);const by={};res.forEach(r=>{(by[r.u]=by[r.u]||[0,0])[1]++;if(r.ok)by[r.u][0]++});S.log.push({d:Date.now(),n:res.length,s:score,mock:!!cfg.mock});S.log=S.log.slice(-50);save();
+  app.innerHTML=`<h2>結果</h2><div class="card"><div class="big">${score} / ${res.length}</div><div class="mute">正答率 ${Math.round(score/res.length*100)}%　所要 ${Math.round((Date.now()-t0)/1000)}秒</div></div><h3>単元別の成績${cfg.mock?'（弱点分析）':''}</h3>${Object.entries(by).sort((a,b)=>a[1][0]/a[1][1]-b[1][0]/b[1][1]).map(([u,[a,b]])=>`<div class="card"><div class="row" style="justify-content:space-between"><span>${esc(ulabel(u))}</span><b>${a}/${b}</b></div><div class="bar"><i style="width:${a/b*100}%;background:${a/b<.6?'var(--ng)':'var(--ok)'}"></i></div></div>`).join('')}<div class="row"><button class="pri" onclick="location.hash='review'">復習へ</button><button onclick="route()">もう一度</button></div>`};
+ if(cfg.mock){const end=t0+cfg.mock*1000;const tick=()=>{const r=Math.max(0,Math.round((end-Date.now())/1000));const e=$('#tm');if(e)e.textContent=`残り ${Math.floor(r/60)}:${String(r%60).padStart(2,'0')}`;if(r<=0)finish()};timer=setInterval(tick,500)}
+ const mark=(q,ok)=>{res.push({u:q.u,ok});if(ok)score++;if(q.id!==null){if(ok){if(S.w[q.id]>0&&cfg.review){S.w[q.id]--}}else S.w[q.id]=(S.w[q.id]||0)+1}save()};
+ const next=()=>{i++;i>=qs.length?finish():show()};
+ const show=()=>{const q=qs[i];
+  const head=`<div class="row" style="justify-content:space-between"><span class="mute">${i+1} / ${qs.length}　${q.lab}</span><span class="mute" id="tm"></span></div><div class="bar" style="margin:6px 0 12px"><i style="width:${i/qs.length*100}%"></i></div>`;
+  const fb=(ok,extra)=>`<div class="card" style="border-color:${ok?'var(--ok)':'var(--ng)'}"><b style="color:${ok?'var(--ok)':'var(--ng)'}">${ok?'正解！':'不正解'}</b> ${extra||''}${q.id!==null?`<div class="mute">${esc(ulabel(q.u))}</div>`:''}</div><button class="pri" id="nx">${i+1>=qs.length?'結果を見る':'次へ'}</button>`;
+  if(q.type==='choice'){app.innerHTML=head+`<div class="card q">${q.html}</div><div class="choices">${q.ch.map(c=>`<button>${esc(c)}</button>`).join('')}</div><div id="fb"></div>`;
+   app.querySelectorAll('.choices button').forEach(b=>b.onclick=()=>{const ok=b.textContent===q.ans;app.querySelectorAll('.choices button').forEach(x=>{x.disabled=true;if(x.textContent===q.ans)x.classList.add('ok')});if(!ok)b.classList.add('ng');mark(q,ok);$('#fb').innerHTML=fb(ok,ok?'':`答え：<b>${esc(q.ans)}</b>`);$('#nx').onclick=next})}
+  else if(q.type==='reveal'){app.innerHTML=head+`<div class="card q">${q.html}</div><div class="row"><button class="pri" id="rv">答えを見る</button></div><div id="fb"></div>`;
+   $('#rv').onclick=()=>{$('#rv').remove();$('#fb').innerHTML=`<div class="card"><div class="mute">答え</div><div style="font:700 22px 'Noto Serif JP',serif;color:var(--accent)">${esc(q.ans)}</div><div class="mute">${esc(ulabel(q.u))}</div></div><div class="row"><button id="ok" class="pri">正解だった</button><button id="ng">まちがえた</button></div>`;
+    $('#ok').onclick=()=>{mark(q,true);next()};$('#ng').onclick=()=>{mark(q,false);next()}}}
+  else if(q.type==='flash'){app.innerHTML=head+`<div class="card q" style="text-align:center;font-size:24px;font-family:'Noto Serif JP',serif">${esc(q.front)}</div><div class="row"><button id="fl" class="pri">答え（解説）を見る</button></div><div id="fb"></div>`;
+   $('#fl').onclick=()=>{$('#fl').remove();$('#fb').innerHTML=`<div class="card">${q.back.split('\n').map(x=>`<div class="occ">${esc(x)}</div>`).join('')}</div><div class="row"><button id="ok" class="pri">覚えてた</button><button id="ng">まだ</button></div>`;
+    $('#ok').onclick=()=>{mark(q,true);S.k[q.id]=1;save();next()};$('#ng').onclick=()=>{mark(q,false);S.k[q.id]=2;save();next()}}}
+  else if(q.type==='order'){const sh=shuf(q.items);const chosen=[];app.innerHTML=head+`<div class="card q">古い順に並べよう（タップした順に入ります）</div><div id="sl"></div><div class="ord" id="op"></div><div id="fb"></div>`;
+   const dr=()=>{$('#sl').innerHTML=chosen.map((c,k)=>`<div class="slot">${k+1}. ${esc(c.s)}</div>`).join('');$('#op').innerHTML=sh.map((c,k)=>`<button class="${chosen.includes(c)?'sel':''}" data-k="${k}" ${chosen.includes(c)?'disabled':''}>${esc(c.s)}</button>`).join('');
+    $('#op').querySelectorAll('button').forEach(b=>b.onclick=()=>{chosen.push(sh[+b.dataset.k]);dr();if(chosen.length===4){const ok=chosen.every((c,k)=>c===q.items[k]);mark(q,ok);$('#op').innerHTML='';$('#fb').innerHTML=fb(ok,'<br>正しい順：'+q.items.map(c=>`<div class="occ"><b>${c.y}年</b>${esc(c.s)}</div>`).join(''));$('#nx').onclick=next}})};dr()}
+ };show();
+}
+
+/* ---------- progress ---------- */
+function progress(){
+ const all=Object.keys(D.terms),k=all.filter(t=>S.k[t]===1).length,m=all.filter(t=>S.k[t]===2).length;
+ app.innerHTML=`<h2>進捗</h2><div class="card"><div class="big">${Math.round(k/all.length*100)}%</div><div class="mute">覚えた ${k} ／ まだ ${m} ／ 全${all.length}語</div><div class="bar" style="margin-top:6px"><i style="width:${k/all.length*100}%"></i></div></div>
+ ${D.units.map(u=>{const ts=unitTerms(u.id),a=ts.filter(t=>S.k[t]===1).length;return `<div class="card ucard ${uc(u.id)}"><div class="row" style="justify-content:space-between"><a href="#study-${u.id}">${esc(u.title)}（プリント${u.prints.join('・')}）</a><span>${a}/${ts.length}</span></div><div class="bar"><i style="width:${ts.length?a/ts.length*100:0}%;background:var(--uc)"></i></div></div>`}).join('')}
+ <h3>テスト履歴</h3>${S.log.slice().reverse().slice(0,10).map(l=>`<div class="mute">${new Date(l.d).toLocaleString('ja-JP')}　${l.mock?'模擬　':''}${l.s}/${l.n}</div>`).join('')||'<p class="mute">まだありません</p>'}`;
+}
+</script>
+</body>
+</html>
