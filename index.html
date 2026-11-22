@@ -111,7 +111,7 @@ function route(){nav();app.onclick=null;const [v,a]=(location.hash||'#study').sl
 function study(a){
  if(a===undefined||a===''){app.innerHTML='<h2>単元を選ぶ</h2><p class="mute">太字＋下線の用語（まとめPDFで強調された重要語）をタップすると解説が開きます。</p><div class="grid">'+D.units.map(u=>{const ts=unitTerms(u.id),k=ts.filter(t=>S.k[t]===1).length;return `<a class="card ucard ${uc(u.id)}" style="text-decoration:none;color:inherit" href="#study-${u.id}"><b>${esc(u.title)}</b><div class="mute">プリント${u.prints.join('・')}</div><div class="bar" style="margin-top:8px"><i style="width:${ts.length?k/ts.length*100:0}%;background:var(--uc)"></i></div><div class="mute">覚えた ${k} / ${ts.length}</div></a>`}).join('')+'</div>';return}
  const u=U(+a);
- app.innerHTML=`<p><a href="#study">← 単元一覧</a></p><h2>${esc(u.title)} <span class="mute">プリント${u.prints.join('・')}</span></h2><div class="row" style="margin:6px 0 10px"><button class="sm ${S.sheet?'pri':''}" id="sh">🟥 赤シート：${S.sheet?'ON':'OFF'}</button><button class="sm" id="sa" ${S.sheet?'':'hidden'}>全部めくる</button><button class="sm" id="sn" ${S.sheet?'':'hidden'}>全部隠す</button></div><div id="tx" class="${uc(u.id)}"></div><div class="row" style="margin-top:20px">${u.id>0?`<button onclick="location.hash='study-${u.id-1}'">← 前の単元</button>`:''}${u.id<D.units.length-1?`<button onclick="location.hash='study-${u.id+1}'">次の単元 →</button>`:''}<button class="pri" onclick="startTest({scope:[${u.id}],type:'mix',n:10})">この単元をテスト</button></div>`;
+ app.innerHTML=`<p><a href="#study">← 単元一覧</a></p><h2>${esc(u.title)} <span class="mute">プリント${u.prints.join('・')}</span></h2><div class="row" style="margin:6px 0 10px"><button class="sm ${S.sheet?'pri':''}" id="sh">🟥 赤シート：${S.sheet?'ON':'OFF'}</button><button class="sm" id="sa" ${S.sheet?'':'hidden'}>全部めくる</button><button class="sm" id="sn" ${S.sheet?'':'hidden'}>全部隠す</button></div><div id="tx" class="${uc(u.id)}"></div><div class="row" style="margin-top:20px">${u.id>0?`<button onclick="location.hash='study-${u.id-1}'">← 前の単元</button>`:''}${u.id<D.units.length-1?`<button onclick="location.hash='study-${u.id+1}'">次の単元 →</button>`:''}<button class="pri" onclick="startTest({scope:[${u.id}],type:'mix',mode:'all'})">この単元をテスト</button></div>`;
  $('#tx').innerHTML=u.p.map(p=>`<div class="para ${p.t}">`+p.s.map(([t,id])=>id===null?esc(t):`<span class="term ${S.k[id]===1?'k':S.k[id]===2?'m':''} ${S.bm[id]?'bm':''}" data-t="${id}">${esc(t)}</span>`).join('')+'</div>').join('');
  const tx=$('#tx');if(S.sheet)tx.classList.add('sheetmode');
  $('#sh').onclick=()=>{S.sheet=!S.sheet;save();study(a)};
@@ -197,24 +197,25 @@ function qDef(id,pool){ // sentence -> term
 function qPerson(id,pool){const t=T(id);const occ=t.occ.filter(o=>o[1].includes(t.k));if(!occ.length)return null;const ps=D.people.filter(x=>x!=id&&!t.k.includes(T(x).k)&&!T(x).k.includes(t.k));if(ps.length<3)return null;const [u,s]=rnd(occ);return {id,u,type:'choice',ans:t.k,html:'この人物は誰？<br>'+esc(mask(s,t.k)).replace(/\u0000/g,'<span class="blank">　　　</span>'),ch:shuf([t.k,...shuf(ps).slice(0,3).map(x=>T(x).k)]),lab:'人物当て'}}
 function qOrder(sc){const ev=D.timeline.filter(e=>sc.includes(e.u)&&e.s.length<90);if(ev.length<4)return null;const seen=new Set(),pick=[];for(const e of shuf(ev)){if(!seen.has(e.y)){seen.add(e.y);pick.push(e)}if(pick.length==4)break}if(pick.length<4)return null;pick.sort((a,b)=>a.y-b.y||a.m-b.m);return {id:null,u:pick[0].u,type:'order',items:pick,lab:'年代並べ替え'}}
 function makeQs(cfg,pool0){
- const sc=cfg.scope;let pool=pool0||termsIn(sc).filter(goodTerm);const out=[];let guard=0;
- while(out.length<cfg.n&&guard++<cfg.n*12){
-  let ty=cfg.type;if(ty==='mix')ty=rnd(['input','input','input','flash','order','person']);
-  let q=null;const id=rnd(pool);
-  if(ty==='choice')q=qCloze(id,termsIn(sc),false);else if(ty==='input')q=qCloze(id,pool,true);else if(ty==='flash')q=qOne(id);else if(ty==='order')q=qOrder(sc);else if(ty==='person'){const ps=pool0?pool.filter(x=>D.pset.has(String(x))):D.people.filter(x=>T(x).u.some(u=>sc.includes(u)));if(ps.length)q=qPerson(rnd(ps),pool)}
-  if(q&&!(q.id!==null&&out.some(o=>o.id===q.id&&o.type===q.type)))out.push(q)}
- return out}
+ const sc=cfg.scope;let pool=pool0;
+ if(!pool){const base=termsIn(sc).filter(goodTerm);pool=cfg.mode==='wrong'?base.filter(t=>S.w[t]>0):base}
+ const ty=cfg.type,out=[];const add=q=>{if(q)out.push(q)};
+ const isP=x=>D.pset.has(String(x));
+ const doInput=()=>pool.forEach(id=>add(qCloze(id,pool,true)));
+ const doFlash=()=>pool.forEach(id=>add(qOne(id)));
+ const doPerson=()=>pool.filter(isP).forEach(id=>add(qPerson(id,pool)));
+ const doOrder=()=>{if(cfg.mode==='wrong')return;const n=Math.min(12,Math.floor(D.timeline.filter(e=>sc.includes(e.u)&&e.s.length<90).length/4));for(let k=0;k<n;k++)add(qOrder(sc))};
+ if(ty==='input')doInput();else if(ty==='flash')doFlash();else if(ty==='person')doPerson();else if(ty==='order')doOrder();else{doInput();doPerson();doOrder()}
+ return shuf(out)}
 
 /* ---------- test ---------- */
 function test(){
  app.innerHTML=`<h2>テスト</h2><div class="card"><b>範囲（単元）</b><div id="sc">${D.units.map(u=>`<label class="chk"><input type="checkbox" value="${u.id}" checked>${esc(u.title)}</label>`).join('')}</div><div class="row" style="margin-top:6px"><button class="sm" id="all">全選択</button><button class="sm" id="none">全解除</button></div></div>
- <div class="card"><b>形式</b><div class="row"><select id="ty"><option value="input">穴埋め（答えを思い浮かべて確認）</option><option value="flash">一問一答（フラッシュカード）</option><option value="order">年代並べ替え（流れ）</option><option value="person">人物当て</option><option value="mix">ミックス</option></select><span class="mute">問題数</span><button class="sm" id="nm">－</button><input type="number" id="n" value="10" min="1" max="100" style="width:4.5em;text-align:center;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--bg)"><button class="sm" id="np">＋</button><span class="mute">問</span></div><div class="row" style="margin-top:10px"><button class="pri" id="go">スタート</button></div></div>
- <div class="card"><b>模擬テスト</b><p class="mute">選択した範囲・問題数でミックス出題。制限時間は1問40秒換算です。終了後に単元ごとの弱点を分析します。</p><button class="pri" id="mock">模擬テスト開始</button></div>`;
+ <div class="card"><b>形式</b><div class="row"><select id="ty"><option value="input">穴埋め（答えを思い浮かべて確認）</option><option value="flash">一問一答（フラッシュカード）</option><option value="order">年代並べ替え（流れ）</option><option value="person">人物当て</option><option value="mix">ミックス</option></select></div><div class="row" style="margin-top:10px"><span class="mute">出題</span><label class="chk"><input type="radio" name="md" value="all" checked>すべて（範囲の全部）</label><label class="chk"><input type="radio" name="md" value="wrong">まちがえたものだけ <span id="wn" class="mute"></span></label></div><div class="row" style="margin-top:10px"><button class="pri" id="go">スタート</button></div></div>`;
  const sel=()=>[...document.querySelectorAll('#sc input:checked')].map(i=>+i.value);
  $('#all').onclick=()=>document.querySelectorAll('#sc input').forEach(i=>i.checked=true);$('#none').onclick=()=>document.querySelectorAll('#sc input').forEach(i=>i.checked=false);
- const nn=()=>Math.max(1,Math.min(100,parseInt($('#n').value)||10));$('#nm').onclick=()=>$('#n').value=Math.max(1,nn()-1);$('#np').onclick=()=>$('#n').value=Math.min(100,nn()+1);
- $('#go').onclick=()=>{if(!sel().length)return;startTest({scope:sel(),type:$('#ty').value,n:nn()})};
- $('#mock').onclick=()=>{if(!sel().length)return;{const n=nn();startTest({scope:sel(),type:'mix',n,mock:n*40})}};
+  const cnt=()=>termsIn(sel()).filter(t=>S.w[t]>0).length;const up=()=>$('#wn').textContent='（'+cnt()+'語）';up();document.querySelectorAll('#sc input').forEach(i=>i.onchange=up);$('#sc').parentNode.querySelectorAll('button').forEach(b=>b.addEventListener('click',up));
+ $('#go').onclick=()=>{if(!sel().length)return;const md=document.querySelector('input[name=md]:checked').value;startTest({scope:sel(),type:$('#ty').value,mode:md,review:md==='wrong'})};
 }
 function review(){
  const wr=Object.keys(S.w).filter(k=>S.w[k]>0),mada=Object.keys(S.k).filter(k=>S.k[k]===2),bm=Object.keys(S.bm);
@@ -224,11 +225,11 @@ function review(){
  <h3>ブックマーク</h3>${bm.map(k=>`<span class="tag" style="cursor:pointer" data-t="${k}">★ ${esc(T(k).k)}</span>`).join('')||'<p class="mute">なし</p>'}
  <h3>メモ</h3>${Object.entries(S.memo).filter(([k,v])=>v).map(([k,v])=>`<div class="card" data-t="${k}" style="cursor:pointer"><b>${esc(T(k).k)}</b><div>${esc(v)}</div></div>`).join('')||'<p class="mute">なし</p>'}`;
  app.onclick=e=>{const c=e.target.closest('[data-t]');if(c)popup(+c.dataset.t)};
- if(pool.length){const sc=D.units.map(u=>u.id);$('#rv').onclick=()=>startTest({scope:sc,type:'mix',n:Math.min(15,Math.max(5,pool.length)),review:true},pool.map(Number));$('#rf').onclick=()=>startTest({scope:sc,type:'flash',n:Math.min(20,pool.length),review:true},pool.map(Number))}
+ if(pool.length){const sc=D.units.map(u=>u.id);$('#rv').onclick=()=>startTest({scope:sc,type:'mix',mode:'wrong',review:true},pool.map(Number));$('#rf').onclick=()=>startTest({scope:sc,type:'flash',mode:'wrong',review:true},pool.map(Number))}
 }
 function startTest(cfg,pool){
  location.hash='test';
- const qs=makeQs(cfg,pool);if(!qs.length){app.innerHTML='<p>この範囲では問題を作れませんでした。範囲を広げてください。</p><button onclick="route()">戻る</button>';return}
+ const qs=makeQs(cfg,pool);if(!qs.length){app.innerHTML=`<p>${cfg.mode==='wrong'?'この範囲に、まちがえた問題はまだありません。':'この範囲では問題を作れませんでした。範囲を広げてください。'}</p><button onclick="route()">戻る</button>`;return}
  let i=0,score=0,res=[],t0=Date.now(),timer=null;
  const finish=()=>{clearInterval(timer);const by={};res.forEach(r=>{(by[r.u]=by[r.u]||[0,0])[1]++;if(r.ok)by[r.u][0]++});S.log.push({d:Date.now(),n:res.length,s:score,mock:!!cfg.mock});S.log=S.log.slice(-50);save();
   app.innerHTML=`<h2>結果</h2><div class="card"><div class="big">${score} / ${res.length}</div><div class="mute">正答率 ${Math.round(score/res.length*100)}%　所要 ${Math.round((Date.now()-t0)/1000)}秒</div></div><h3>単元別の成績${cfg.mock?'（弱点分析）':''}</h3>${Object.entries(by).sort((a,b)=>a[1][0]/a[1][1]-b[1][0]/b[1][1]).map(([u,[a,b]])=>`<div class="card"><div class="row" style="justify-content:space-between"><span>${esc(ulabel(u))}</span><b>${a}/${b}</b></div><div class="bar"><i style="width:${a/b*100}%;background:${a/b<.6?'var(--ng)':'var(--ok)'}"></i></div></div>`).join('')}<div class="row"><button class="pri" onclick="location.hash='review'">復習へ</button><button onclick="route()">もう一度</button></div>`};
