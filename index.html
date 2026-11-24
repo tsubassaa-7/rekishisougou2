@@ -112,7 +112,7 @@ function route(){if(window._skip){window._skip=0;nav();return}nav();app.onclick=
 function study(a){
  if(a===undefined||a===''){app.innerHTML='<h2>単元を選ぶ</h2><p class="mute">太字＋下線の用語（まとめPDFで強調された重要語）をタップすると解説が開きます。</p><div class="grid">'+D.units.map(u=>{const ts=unitTerms(u.id),k=ts.filter(t=>S.k[t]===1).length;return `<a class="card ucard ${uc(u.id)}" style="text-decoration:none;color:inherit" href="#study-${u.id}"><b>${esc(u.title)}</b><div class="mute">プリント${u.prints.join('・')}</div><div class="bar" style="margin-top:8px"><i style="width:${ts.length?k/ts.length*100:0}%;background:var(--uc)"></i></div><div class="mute">覚えた ${k} / ${ts.length}</div></a>`}).join('')+'</div>';return}
  const u=U(+a);
- app.innerHTML=`<p><a href="#study">← 単元一覧</a></p><h2>${esc(u.title)} <span class="mute">プリント${u.prints.join('・')}</span></h2><div class="row" style="margin:6px 0 10px"><button class="sm ${S.sheet?'pri':''}" id="sh">🟥 赤シート：${S.sheet?'ON':'OFF'}</button><button class="sm" id="sa" ${S.sheet?'':'hidden'}>全部めくる</button><button class="sm" id="sn" ${S.sheet?'':'hidden'}>全部隠す</button></div><div id="tx" class="${uc(u.id)}"></div><p class="mute" style="margin-top:20px">赤シートでテスト：赤いところを見て答えを思い浮かべ、タップして答え合わせ。「正解だった」を押した語は自動で「覚えた」、「まちがえた」は「まだ」になります。</p><div class="row">${u.id>0?`<button onclick="location.hash='study-${u.id-1}'">← 前の単元</button>`:''}${u.id<D.units.length-1?`<button onclick="location.hash='study-${u.id+1}'">次の単元 →</button>`:''}<button class="pri" onclick="startTest({scope:[${u.id}],type:'input',mode:'all',autoMark:true})">この単元を赤シートでテスト</button></div>`;
+ app.innerHTML=`<p><a href="#study">← 単元一覧</a></p><h2>${esc(u.title)} <span class="mute">プリント${u.prints.join('・')}</span></h2><div class="row" style="margin:6px 0 10px"><button class="sm ${S.sheet?'pri':''}" id="sh">🟥 赤シート：${S.sheet?'ON':'OFF'}</button><button class="sm" id="sa" ${S.sheet?'':'hidden'}>全部めくる</button><button class="sm" id="sn" ${S.sheet?'':'hidden'}>全部隠す</button></div><div id="tx" class="${uc(u.id)}"></div><p class="mute" style="margin-top:20px">赤シートでテスト：赤いところを見て答えを思い浮かべ、タップして答え合わせ。出題は「まだ」とテスト前の語だけ（「覚えた」は出ません）。「正解だった」を押した語は自動で「覚えた」、「まちがえた」は「まだ」になります。</p><div class="row">${u.id>0?`<button onclick="location.hash='study-${u.id-1}'">← 前の単元</button>`:''}${u.id<D.units.length-1?`<button onclick="location.hash='study-${u.id+1}'">次の単元 →</button>`:''}<button class="pri" onclick="startTest({scope:[${u.id}],type:'input',mode:'all',autoMark:true})">この単元を赤シートでテスト</button></div>`;
  $('#tx').innerHTML=u.p.map(p=>`<div class="para ${p.t}">`+p.s.map(([t,id])=>id===null?esc(t):`<span class="term ${S.k[id]===1?'k':S.k[id]===2?'m':''} ${S.bm[id]?'bm':''}" data-t="${id}">${esc(t)}</span>`).join('')+'</div>').join('');
  const tx=$('#tx');if(S.sheet)tx.classList.add('sheetmode');
  $('#sh').onclick=()=>{S.sheet=!S.sheet;save();study(a)};
@@ -199,7 +199,7 @@ function qPerson(id,pool){const t=T(id);const occ=t.occ.filter(o=>o[1].includes(
 function qOrder(sc){const ev=D.timeline.filter(e=>sc.includes(e.u)&&e.s.length<90);if(ev.length<4)return null;const seen=new Set(),pick=[];for(const e of shuf(ev)){if(!seen.has(e.y)){seen.add(e.y);pick.push(e)}if(pick.length==4)break}if(pick.length<4)return null;pick.sort((a,b)=>a.y-b.y||a.m-b.m);return {id:null,u:pick[0].u,type:'order',items:pick,lab:'年代並べ替え'}}
 function makeQs(cfg,pool0){
  const sc=cfg.scope;window._sc=sc;let pool=pool0;
- if(!pool){const base=termsIn(sc).filter(goodTerm);pool=cfg.mode==='wrong'?base.filter(t=>S.w[t]>0):base}
+ if(!pool){const base=termsIn(sc).filter(goodTerm);pool=cfg.mode==='wrong'?base.filter(t=>S.w[t]>0):cfg.autoMark?base.filter(t=>S.k[t]!==1):base}
  const ty=cfg.type,out=[];const add=q=>{if(q)out.push(q)};
  const isP=x=>D.pset.has(String(x));
  const doInput=()=>pool.forEach(id=>add(qCloze(id,pool,true)||(cfg.autoMark?qOne(id):null)));
@@ -230,7 +230,7 @@ function review(){
 }
 function startTest(cfg,pool){
  if(location.hash!=='#test'){window._skip=1;location.hash='test'}
- const qs=makeQs(cfg,pool);if(!qs.length){app.innerHTML=`<p>${cfg.mode==='wrong'?'この範囲に、まちがえた問題はまだありません。':'この範囲では問題を作れませんでした。範囲を広げてください。'}</p><button onclick="route()">戻る</button>`;return}
+ const qs=makeQs(cfg,pool);if(!qs.length){app.innerHTML=`<p>${cfg.autoMark?'この単元の重要語句は、すべて「覚えた」になっています。すばらしい！':cfg.mode==='wrong'?'この範囲に、まちがえた問題はまだありません。':'この範囲では問題を作れませんでした。範囲を広げてください。'}</p><button onclick="route()">戻る</button>`;return}
  let i=0,score=0,res=[],t0=Date.now(),timer=null;
  const finish=()=>{clearInterval(timer);const by={};res.forEach(r=>{(by[r.u]=by[r.u]||[0,0])[1]++;if(r.ok)by[r.u][0]++});S.log.push({d:Date.now(),n:res.length,s:score,mock:!!cfg.mock});S.log=S.log.slice(-50);save();
   app.innerHTML=`<h2>結果</h2><div class="card"><div class="big">${score} / ${res.length}</div><div class="mute">正答率 ${Math.round(score/res.length*100)}%　所要 ${Math.round((Date.now()-t0)/1000)}秒</div></div><h3>単元別の成績${cfg.mock?'（弱点分析）':''}</h3>${Object.entries(by).sort((a,b)=>a[1][0]/a[1][1]-b[1][0]/b[1][1]).map(([u,[a,b]])=>`<div class="card"><div class="row" style="justify-content:space-between"><span>${esc(ulabel(u))}</span><b>${a}/${b}</b></div><div class="bar"><i style="width:${a/b*100}%;background:${a/b<.6?'var(--ng)':'var(--ok)'}"></i></div></div>`).join('')}<div class="row"><button class="pri" onclick="location.hash='review'">復習へ</button><button onclick="route()">もう一度</button></div>`};
